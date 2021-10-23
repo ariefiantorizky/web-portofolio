@@ -43,7 +43,7 @@
 .header {
     position: absolute;
     top: 50%;
-    right: -120px;
+    right: -100px;
     transform: rotate(90deg);
     display: none;
     z-index: 999;
@@ -165,7 +165,7 @@
     border-bottom: 2px solid #FF004D;
     width: max-content;
     padding-bottom: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 .about-header h1 span,
@@ -185,11 +185,17 @@
 
 .about-img img {
     width: 80%;
+    display: block;
+    margin: auto;
 }
 
 .about-main p {
     font-family: "Montserrat", sans-serif;
-    margin-bottom: 2rem;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    margin-bottom: 15px;
+    text-align: justify;
 }
 
 .about-main a {
@@ -200,11 +206,22 @@
     text-decoration: none;
 }
 
-#show-profile {
+.about-main .desc div {
+    margin-top: 3em;
+}
+
+/* #show-profile {
     padding: 0;
     background: none;
     color: #282C35;
     margin: auto 12px;
+} */
+
+.skill {
+    width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    margin-bottom: 5rem;
 }
 
 .port-header h1,
@@ -221,6 +238,38 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
+}
+
+.skill-main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.skill-main div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #fff;
+    padding: 12px;
+    border-radius: 3px;
+}
+
+.skill-main div i {
+    color: #fff;
+    font-size: 25px;
+}
+
+.skill-main div span {
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+.skill-main div img {
+    width: 25px;
 }
 
 .work {
@@ -432,9 +481,17 @@
     border-radius: 3px;
 }
 
+.sosmed a:hover {
+    background-color: #282C35;
+}
+
 .sosmed i {
     font-size: 23px;
     color: #fff;
+}
+
+.sosmed a:hover>i {
+    color: var(--primary-color);
 }
 
 .contact-form {
@@ -494,6 +551,117 @@ textarea {
     font-weight: 600;
 }
 
+/* LOADING */
+
+.content-loaded>main,
+.content-loaded>footer {
+    display: none;
+}
+
+.loading {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: var(--brand-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-load {
+    width: 80%;
+    height: 30px;
+    background: rgba(190, 190, 190, 0.459);
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.progress-load::after {
+    content: "Please Wait...";
+    margin: 20px auto;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    animation: e 5s ease-in-out forwards;
+    font-size: 16px;
+}
+
+@keyframes e {
+
+    0%,
+    15% {
+        content: "Please Wait...";
+    }
+
+    25% {
+        content: "Content is loading...";
+    }
+
+    50% {
+        content: "Okay?";
+    }
+
+    85% {
+        content: "Content loaded successfull...";
+    }
+
+    100% {
+        content: "Thanks 😄";
+    }
+}
+
+.progress-value {
+    width: 0%;
+    height: 100%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: loading 5s ease forwards;
+}
+
+@keyframes loading {
+    0% {
+        width: 0%;
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+#value {
+    --p: 0;
+    animation: p 5s steps(100) forwards;
+    counter-reset: p var(--p);
+}
+
+#value::after {
+    content: counter(p) "%";
+}
+
+@keyframes p {
+
+    90%,
+    100% {
+        --p: 100;
+    }
+}
+
+/* LOADING */
+
 footer {
     width: 100%;
     padding: 12px;
@@ -511,6 +679,10 @@ footer p {
     .main h1 {
         font-size: 3em;
     }
+
+    .skill-main {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (min-width: 520px) and (max-width: 750px) {
@@ -522,6 +694,10 @@ footer p {
     .contact-main {
         width: 70%;
         margin: auto;
+    }
+
+    .progress-load {
+        width: 50%;
     }
 }
 
@@ -593,5 +769,19 @@ footer p {
 
     .contact-details {
         width: 30%;
+    }
+
+    .skill-main {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .progress-load {
+        width: 30%;
+    }
+}
+
+@media (min-width: 1250px) {
+    .skill-main {
+        grid-template-columns: repeat(5, 1fr);
     }
 }
